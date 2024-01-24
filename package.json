@@ -1,0 +1,166 @@
+{
+  "name": "vscode-test",
+  "displayName": "vscode-test",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "gmm",
+  "icon": "svg/toilet-paper-svgrepo-com.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "enabledApiProposals": [
+    "contribEditorContentMenu"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "keybindings": [
+      {
+        "command": "vscode-test.helloWorld",
+        "key": "ctrl+4",
+        "mac": "cmd+4",
+        "when": "editorTextFocus"
+      }
+    ],
+    "commands": [
+      {
+        "command": "explorer-marks.on_item_clicked",
+        "title": "cwt tree view item"
+      },
+      {
+        "command": "explorer-marks.addEntry",
+        "title": "Add",
+        "icon": {
+          "light": "resources/light/add.svg",
+          "dark": "resources/dark/add.svg"
+        }
+      },
+      {
+        "command": "explorer-marks.clearEntry",
+        "title": "Clear",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "explorer-marks.deleteEntry",
+        "title": "Del",
+        "icon": {
+          "light": "resources/light/close_inverse.svg",
+          "dark": "resources/dark/close_inverse.svg"
+        }
+      },
+      {
+        "command": "nodeDependencies.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "nodeDependencies.addEntry",
+        "title": "Add"
+      },
+      {
+        "command": "nodeDependencies.editEntry",
+        "title": "Edit",
+        "icon": {
+          "light": "resources/light/edit.svg",
+          "dark": "resources/dark/edit.svg"
+        }
+      },
+      {
+        "command": "nodeDependencies.deleteEntry",
+        "title": "Delete"
+      },
+      {
+        "command": "vscode-test.helloWorld",
+        "title": "Hello World",
+        "category": "Hello",
+        "icon": {
+          "light": "svg/genetic-data-svgrepo-com.svg",
+          "dark": "svg/toilet-paper-svgrepo-com.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "explorer-marks.addEntry",
+          "group": "navigation"
+        },
+        {
+          "command": "explorer-marks.clearEntry",
+          "group": "navigation"
+        },
+        {
+          "command": "vscode-test.helloWorld",
+          "when": "view == terminal",
+          "group": "navigation"
+        },
+        {
+          "command": "nodeDependencies.refreshEntry",
+          "when": "view == vscode-test",
+          "group": "navigation"
+        },
+        {
+          "command": "nodeDependencies.addEntry",
+          "when": "view == vscode-test"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "explorer-marks.deleteEntry",
+          "when": "view == explorer-marks",
+          "group": "inline"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vscode-test",
+          "title": "vscode-test",
+          "icon": "svg/toilet-paper-svgrepo-com.svg"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "explorer-marks",
+          "name": "Marks"
+        }
+      ],
+      "vscode-test": [
+        {
+          "id": "vscode-test",
+          "name": "vscode-test",
+          "icon": "svg/toilet-paper-svgrepo-com.svg",
+          "title": "vscode-test"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
