@@ -22,24 +22,6 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "vscode-test" is now active!');
 
-  // register a content provider for show the fileLineContentArray
-  // const previewUri = vscode.Uri.parse('vscode-test://authority/vscode-test');
-  // class TextDocumentContentProvider implements vscode.TextDocumentContentProvider {
-  // 	onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
-  // 	onDidChange = this.onDidChangeEmitter.event;
-  // 	public provideTextDocumentContent(uri: vscode.Uri): string {
-  // 		let content = '';
-  // 		for (let i = 0; i < fileLineContentArray.length; i++) {
-  // 			content += fileLineContentArray[i].fileName + ':' + fileLineContentArray[i].lineNumber + ':' + fileLineContentArray[i].content + '\n';
-  // 		}
-  // 		content = "hello"
-  // 		return content;
-  // 	}
-  // }
-  // const provider = new TextDocumentContentProvider();
-  // const registration = vscode.workspace.registerTextDocumentContentProvider('vscode-test', provider);
-  // context.subscriptions.push(registration);
-
   const rootPath =
     vscode.workspace.workspaceFolders &&
     vscode.workspace.workspaceFolders.length > 0
@@ -56,10 +38,6 @@ export function activate(context: vscode.ExtensionContext) {
     // dragAndDropController: new TestViewDragAndDrop(context),
   });
 
-  // const rootPath = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
-  // ? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
-  // const nodeDependenciesProvider = new DepNodeProvider(rootPath);
-  // vscode.window.registerTreeDataProvider('vscode-test', nodeDependenciesProvider);
   let refreshEntry = () => {
     marksProvider.refresh();
     vscode.window.showInformationMessage(`Successfully called refresh entry.`);
@@ -95,11 +73,6 @@ export function activate(context: vscode.ExtensionContext) {
   let itemClicked = (item: Dependency) => {
     marksProvider.onItemClick(item);
   };
-  vscode.commands.registerCommand(
-    "nodeDependencies.refreshEntry",
-    refreshEntry
-  );
-  vscode.commands.registerCommand("nodeDependencies.addEntry", addEntryFunc);
   vscode.commands.registerCommand("explorer-marks.addEntry", addEntryFunc);
   vscode.commands.registerCommand("explorer-marks.refreshEntry", refreshEntry);
   vscode.commands.registerCommand("explorer-marks.deleteEntry", deleteEntry);
