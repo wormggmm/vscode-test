@@ -12,7 +12,7 @@ export class MarksProvider implements vscode.TreeDataProvider<Dependency> {
       .replace("/" + fileName, "");
     for (let ele of this.elements) {
       if (
-        ele.getLabel() == fileName ||
+        ele.getLabel() == fileName &&
         ele.getDescription() == fileReleationPath
       ) {
         return ele;

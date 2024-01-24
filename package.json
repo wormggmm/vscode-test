@@ -1,9 +1,9 @@
 {
-  "name": "vscode-test",
-  "displayName": "vscode-test",
-  "description": "",
+  "name": "vscode-extension-explorer-marks",
+  "displayName": "explorer-marks",
+  "description": "mark file and line into explorer/marks tree view",
   "version": "0.0.1",
-  "publisher": "gmm",
+  "publisher": "wormggmm",
   "repository": "https://github.com/wormggmm/vscode-test",
   "icon": "svg/toilet-paper-svgrepo-com.png",
   "engines": {
