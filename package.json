@@ -4,6 +4,7 @@
   "description": "",
   "version": "0.0.1",
   "publisher": "gmm",
+  "repository": "https://github.com/wormggmm/vscode-test",
   "icon": "svg/toilet-paper-svgrepo-com.png",
   "engines": {
     "vscode": "^1.85.0"
@@ -19,13 +20,23 @@
   "contributes": {
     "keybindings": [
       {
-        "command": "vscode-test.helloWorld",
+        "command": "explorer-marks.addEntry",
         "key": "ctrl+4",
         "mac": "cmd+4",
         "when": "editorTextFocus"
       }
     ],
     "commands": [
+      {
+        "command": "explorer-marks.collapsedAll",
+        "title": "collapsed all",
+        "icon": "$(chevron-up)"
+      },
+      {
+        "command": "explorer-marks.expandedAll",
+        "title": "expanded all",
+        "icon": "$(chevron-down)"
+      },
       {
         "command": "explorer-marks.on_item_clicked",
         "title": "cwt tree view item"
@@ -50,31 +61,29 @@
           "light": "resources/light/close_inverse.svg",
           "dark": "resources/dark/close_inverse.svg"
         }
-      },
-      {
-        "command": "vscode-test.helloWorld",
-        "title": "Hello World",
-        "category": "Hello",
-        "icon": {
-          "light": "svg/genetic-data-svgrepo-com.svg",
-          "dark": "svg/toilet-paper-svgrepo-com.svg"
-        }
       }
     ],
     "menus": {
       "view/title": [
         {
           "command": "explorer-marks.addEntry",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == explorer-marks"
+        },
+        {
+          "command": "explorer-marks.collapsedAll",
+          "group": "navigation",
+          "when": "view == explorer-marks"
+        },
+        {
+          "command": "explorer-marks.expandedAll",
+          "group": "navigation",
+          "when": "view == explorer-marks"
         },
         {
           "command": "explorer-marks.clearEntry",
-          "group": "navigation"
-        },
-        {
-          "command": "vscode-test.helloWorld",
-          "when": "view == terminal",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == explorer-marks"
         }
       ],
       "view/item/context": [
@@ -85,49 +94,38 @@
         }
       ]
     },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "vscode-test",
-          "title": "vscode-test",
-          "icon": "svg/toilet-paper-svgrepo-com.svg"
-        }
-      ]
-    },
     "views": {
       "explorer": [
         {
           "id": "explorer-marks",
           "name": "Marks"
         }
-      ],
-      "vscode-test": [
-        {
-          "id": "vscode-test",
-          "name": "vscode-test",
-          "icon": "svg/toilet-paper-svgrepo-com.svg",
-          "title": "vscode-test"
-        }
       ]
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "package": "vsce package",
+    "test-compile": "tsc -p ./"
   },
   "devDependencies": {
-    "@types/vscode": "^1.85.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
     "@vscode/test-cli": "^0.0.4",
-    "@vscode/test-electron": "^2.3.8"
+    "@vscode/test-electron": "^2.3.8",
+    "esbuild": "^0.19.12",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
   }
 }
